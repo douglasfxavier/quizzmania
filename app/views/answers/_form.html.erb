@@ -1,0 +1,56 @@
+<%= form_with(model: answer, local: true) do |form| %>
+  <% if answer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
+
+      <ul>
+      <% answer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%# Inclui o id de question como campo oculto (não exibdo no form, mas enviado no post) %>
+  <%= hidden_field(:answer, :question_id, :value => params[:question_id]) %>
+
+  <div class="field">
+     <h2># <%= @question.description %></h2>
+  </div>
+ 
+  <br>
+
+  <div class="field">
+      <h4>Alternativas</h4>
+      <br>
+      <%= collection_radio_buttons(:answer, :choice_id, @question.choices, :id, :description) do |b|%>
+          <%= b.label {b.radio_button + " " + b.text} %> <br>
+      <% end %>
+      <br>
+  </div>
+  
+  <br>
+
+    <div>
+    <h2>Dados do usuario</h2>
+    <%= form.fields_for :user do |user_field| %>  
+      <div class="field"> 
+        <%= user_field.label :name %>
+        <%= user_field.text_field :name, :class=>'form-control col-md-5'  %>
+      </div>
+
+      <div class="field"> 
+        <%= user_field.label :email %>
+        <%= user_field.text_field :email, :class=>'form-control col-md-5'  %>
+      </div>
+    <% end %>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= form.submit 'Enviar'%>
+  </div>
+
+  <br>
+<% end %>

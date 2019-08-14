@@ -1,0 +1,18 @@
+<div class="container">
+	<p id="notice"><%= notice %></p>
+
+	<h3>Sua Resposta </h3>
+
+	<p>
+	  <strong>Pergunta:</strong>
+	  <%= @answer.question.description %>
+	</p>
+
+	<p>
+	  <strong>Alternativa escolhida:</strong>
+	  <%= @answer.choice.description %>
+	</p>
+
+
+	<%= link_to 'Voltar', questions_path %>
+</div>

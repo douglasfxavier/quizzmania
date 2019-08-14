@@ -1,0 +1,16 @@
+<div class="row d-flex justify-content-between">
+	<% @questions.each do |question| %>
+	<% @description = question.description %>
+	<div class="card m-3" style="width: 18rem; height:  15rem">
+		<div class="card-body">
+			<div style="width: 18rem; height: 10rem">
+				<h1 class="card-title"> <%= "Question" %> </h1>
+				<p class="card-text"> <%= @description %></p>
+			</div>			
+			<div>
+				<%= link_to 'Responder', new_answer_path({:question_id => question}), class: "btn btn-info" %>
+			</div>
+		</div>
+	</div>
+	<% end %>
+</div>

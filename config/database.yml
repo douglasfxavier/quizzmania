@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  password: doug3684
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: quizzmania_development
+
+test:
+  <<: *default
+  database: quizzmania_test
+
+production:
+  <<: *default
+  database: quizzmania

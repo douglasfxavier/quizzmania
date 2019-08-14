@@ -1,0 +1,30 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <h1>Perguntas</h1>
+
+  <table class="table table-sm table-borderless">
+    <thead>
+      <tr>
+        <th></th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @questions.each do |question| %>
+        <tr>
+          <td><%= question.descricao %></td>
+          <td><%= link_to 'Visualizar', question %></td>
+          <td><%= link_to 'Editar', edit_question_path(question) %></td>
+          <td><%= link_to 'Responder', new_answer_path({:question_id => question}) %> </td>
+          <td><%= link_to 'Excluir', question, method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'Nova pergunta', new_question_path %>
+</div>

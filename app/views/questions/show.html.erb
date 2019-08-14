@@ -1,0 +1,36 @@
+<div class="container">
+	<p id="notice"><%= notice %></p>
+
+	<h3>Pergunta</h3>
+	<p>
+		<%= @question.description %>
+	</p>
+
+	<b>
+		<h3>Resultados</h3>
+		<h5>Total de respostas</h5>
+		<% @total = @question.answers.count %>
+		<p><strong><%= @total %></strong></p>
+
+		<% @map = Hash.new %>
+		<% @question.answers.each do |answer| %>
+		<p>
+			<% @map[answer.choice.id] = answer.choice.answers.count %>
+		</p>
+		<% end %>
+
+		<h5>Respostas por alternativa</h5>
+		<table class="table table-sm table-borderless">
+			<tbody>
+				<% @question.choices.each do |choice| %>
+					<tr>
+						<td><%= choice.description %></td>
+						<td> <%= @map[choice.id] ? "#{(100.00 * @map[choice.id]/@total).round(1)} %" : "00.0 %" %> </td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+		<%= link_to 'Editar', edit_question_path(@question) %> |
+		<%= link_to 'Voltar', questions_path %>
+	</div>
