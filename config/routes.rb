@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :quizzs
+  resources :types
   get 'home/index'
   root 'home#index'
   resources :answers, except: [:destroy, :edit]

@@ -1,0 +1,27 @@
+<%= form_with(model: quizz, local: true) do |form| %>
+  <% if quizz.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(quizz.errors.count, "error") %> prohibited this quizz from being saved:</h2>
+
+      <ul>
+      <% quizz.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type_id %>
+    <%= form.text_field :type_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
