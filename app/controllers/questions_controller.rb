@@ -15,12 +15,12 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
-    @quizzs = Quizz.all
-    @quizz = params[:quizzid]
+    @quizz_id = params[:quizzid]
   end
 
   # GET /questions/1/edit
   def edit
+      @quizz_id = params[:quizzid]
   end
 
   # POST /questions
@@ -42,9 +42,10 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+ 
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question atualizada com sucesso.' }
+        format.html { redirect_to @question, quizzid: @quizz_id, notice: 'Question atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }

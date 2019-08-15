@@ -14,8 +14,12 @@
 	<% if @quizz.questions.size > 0 %>
 		<strong>Questions</strong>
 	<% end %>
+	<% @contador = 0 %>
 	<% @quizz.questions.each do |question| %>
-		<%= question.description %>
+		<p><%= @contador = @contador+1 %>
+			<%= question.description  =%> 
+			<%= link_to 'Edit', edit_question_path(question, :quizzid => @quizz.id) %>	
+		</p>
 	<% end %>
 </p>
 

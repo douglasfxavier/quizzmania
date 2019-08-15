@@ -1,8 +1,9 @@
 <div class="container">
 	<p id="notice"><%= notice %></p>
 
-	<h3>Sua Resposta </h3>
+	<h3>Suas Respostas </h3>
 
+	<% @answer.questions.each %>
 	<p>
 	  <strong>Pergunta:</strong>
 	  <%= @answer.question.description %>

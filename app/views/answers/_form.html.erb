@@ -11,43 +11,25 @@
     </div>
   <% end %>
 
-  <%# Inclui o id de question como campo oculto (não exibdo no form, mas enviado no post) %>
-  <%= hidden_field(:answer, :question_id, :value => params[:question_id]) %>
+  <%= form.text_field :quizz_id, :type=>'hidden', :value=>@quizz_id %>
 
   <div class="field">
-     <h2># <%= @question.description %></h2>
+      <h2><%= @quizz.description %></h2>
   </div>
- 
-  <br>
 
-  <div class="field">
-      <h4>Alternativas</h4>
-      <br>
-      <%= collection_radio_buttons(:answer, :choice_id, @question.choices, :id, :description) do |b|%>
-          <%= b.label {b.radio_button + " " + b.text} %> <br>
-      <% end %>
-      <br>
-  </div>
-  
-  <br>
+  <% @quizz.questions.each do |question|%>      
+          <h3><%= question.description =%></h3>
 
-    <div>
-    <h2>Dados do usuario</h2>
-    <%= form.fields_for :user do |user_field| %>  
-      <div class="field"> 
-        <%= user_field.label :name %>
-        <%= user_field.text_field :name, :class=>'form-control col-md-5'  %>
-      </div>
-
-      <div class="field"> 
-        <%= user_field.label :email %>
-        <%= user_field.text_field :email, :class=>'form-control col-md-5'  %>
-      </div>
+             <fieldset id="answer[questions[<%= question.id %>]">
+                <% question.choices.each do |choice| %>
+                  <p> 
+                    <input type="radio" name="answer[question[<%= question.id %>]]" value="<%= choice.id %>">
+                    <%= choice.description %> 
+                  </p>
+                <% end %>
+            </fieldset> 
     <% end %>
-  </div>
-
-  <br>
-
+  
   <div class="actions">
     <%= form.submit 'Enviar'%>
   </div>

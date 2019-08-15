@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= form.text_field :quizz_id, :type=>'hidden', :class=>'form-control col-md-5', :value=> @quizz %>
+  <%= form.text_field :quizz_id, :type=>'hidden', :value=>@quizz_id %>
 
   <div class="field">
     <h3><%= form.label :question %></h3>
@@ -20,8 +20,8 @@
 
   <h3<%= :choices %></h3>
   <div id="choices">
-      <%= form.fields_for :choices do |choices_fields| %>
-        <%= render partial: "choice_fields", locals: {f: choices_fields} %>
+      <%= form.fields_for :choices do |choice_fields| %>
+        <%= render partial: "choice_fields", locals: {f: choice_fields} %>
       <% end %>
       <%= link_to_add_association('Incluir alternativa',form, :choices) %>
   </div>
