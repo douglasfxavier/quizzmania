@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  belongs_to :answer
+  has_many :answers, dependent: :destroy
 end
