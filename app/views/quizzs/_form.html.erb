@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :type_id %>
-    <%= form.text_field :type_id %>
+     <%= collection_select(:quizz,:type_id, @types, :id, :description) %>
   </div>
 
   <div class="actions">

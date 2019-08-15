@@ -9,12 +9,14 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1
   # GET /questions/1.json
-  def show
+  def show    
   end
 
   # GET /questions/new
   def new
     @question = Question.new
+    @quizzs = Quizz.all
+    @quizz = params[:quizzid]
   end
 
   # GET /questions/1/edit
@@ -71,6 +73,7 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:description)
+      params.require(:question).permit(:description,:quizz_id,
+        choices_attributes: [:id,:description,:_destroy])
     end
 end

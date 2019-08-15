@@ -7,8 +7,21 @@
 
 <p>
   <strong>Type:</strong>
-  <%= @quizz.type %>
+  <%= @quizz.type.description %>
 </p>
+
+<p>
+	<% if @quizz.questions.size > 0 %>
+		<strong>Questions</strong>
+	<% end %>
+	<% @quizz.questions.each do |question| %>
+		<%= question.description %>
+	<% end %>
+</p>
+
+<div>
+  <td><%= link_to 'New question', new_question_path(:quizzid => @quizz.id) %></td>
+</div>
 
 <%= link_to 'Edit', edit_quizz_path(@quizz) %> |
 <%= link_to 'Back', quizzs_path %>

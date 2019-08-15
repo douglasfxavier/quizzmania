@@ -15,10 +15,12 @@ class QuizzsController < ApplicationController
   # GET /quizzs/new
   def new
     @quizz = Quizz.new
+    @types = Type.all
   end
 
   # GET /quizzs/1/edit
   def edit
+    @types = Type.all
   end
 
   # POST /quizzs
@@ -73,4 +75,5 @@ class QuizzsController < ApplicationController
         choices_attributes: [:id,:description,:_destroy],
         questions_attributes: [:id, :description, :quizz_id,:_destroy])
     end
+
 end
