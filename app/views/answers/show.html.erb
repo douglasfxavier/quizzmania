@@ -3,8 +3,19 @@
 
 	<h3>Suas Respostas </h3>
 
-	<% @answer.questions.each %>
-	<p>
+
+	<% @answers.each do |answer| %>
+		
+			<% answer.questions.each do |question| %>
+			<p>
+				<strong><%= question.description %>: 
+					<%= question.answers[0].choice.description %></strong>
+			</p>
+			<% end %>
+		
+	<% end %>
+
+<!-- 	<p>
 	  <strong>Pergunta:</strong>
 	  <%= @answer.question.description %>
 	</p>
@@ -12,7 +23,7 @@
 	<p>
 	  <strong>Alternativa escolhida:</strong>
 	  <%= @answer.choice.description %>
-	</p>
+	</p> -->
 
 
 	<%= link_to 'Voltar', questions_path %>

@@ -18,7 +18,8 @@
 	<% @quizz.questions.each do |question| %>
 		<p><%= @contador = @contador+1 %>
 			<%= question.description  =%> 
-			<%= link_to 'Edit', edit_question_path(question, :quizzid => @quizz.id) %>	
+			<%= link_to 'Edit', edit_question_path(question, :quizzid => @quizz.id) %>
+			<%= link_to 'Delete', question, method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' } %></td>	
 		</p>
 	<% end %>
 </p>

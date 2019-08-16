@@ -15,12 +15,12 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
-    @quizz_id = params[:quizzid]
+    @quizz_id = params['quizzid']
   end
 
   # GET /questions/1/edit
   def edit
-      @quizz_id = params[:quizzid]
+    @quizz_id = params['quizzid']
   end
 
   # POST /questions
@@ -58,10 +58,11 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1.json
   def destroy
 
+    @quizz_id = @question.quizz.id
     @question.destroy
 
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question excluída com sucesso.' }
+      format.html { redirect_to quizz_path(@quizz_id), notice: 'Question excluída com sucesso.' }
       format.json { head :no_content }
     end
   end

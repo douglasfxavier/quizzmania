@@ -18,14 +18,14 @@
     <%= form.text_field :description, :class=>'form-control col-md-5' %>
   </div>
 
-  <h3<%= :choices %></h3>
+  <h3> Choices</h3>
   <div id="choices">
       <%= form.fields_for :choices do |choice_fields| %>
         <%= render partial: "choice_fields", locals: {f: choice_fields} %>
       <% end %>
       <%= link_to_add_association('Incluir alternativa',form, :choices) %>
   </div>
-
+  <br>
   <div class="actions">
     <%= form.submit 'Salvar' %>
   </div>
