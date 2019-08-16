@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
-  resources :tags
+  devise_for :users
   get 'home/index'
   root 'home#index'
-  resources :quizzs
-  resources :types
-  resources :answers, except: [:destroy, :edit]
-  resources :questions, except: [:index]
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  authenticate :user do
+  	resources :quizzs
+  	resources :types
+  	resources :questions
+  	resources :tags
+  	resources :answers
+  end
+  resources :answers, except: [:update, :destroy]
 end

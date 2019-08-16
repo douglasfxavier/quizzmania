@@ -18,7 +18,11 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
-# Melhorar visualização do Rails Console
+# Authentication packages
+gem 'devise'
+gem 'cancancan'
+
+# Improve Rails Console visualization
 gem 'pry-rails'
 
 # Relacionamento Has many (embutido)

@@ -5,13 +5,26 @@
   <a class="navbar-brand" href="<%= root_path %>">QuizzMania</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item">
-        <a class="nav-link" href="<%= quizzs_path %>">Quizzes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= types_path %>">Types</a>
-      </li>
-    </ul>
+    <% if can? :manage, :all %>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="<%= quizzs_path %>">Quizzes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= types_path %>">Types</a>
+        </li>
+      </ul>
+    <% end %>
   </div>
+  <ul class="nav navbar-nav navbar-right">
+    <% if user_signed_in? %>
+      <li>
+      <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+      </li>
+    <% else %>
+      <li>
+      <%= link_to('Login', new_user_session_path) %>  
+      </li>
+    <% end %>      
+  </ul>
 </nav>
