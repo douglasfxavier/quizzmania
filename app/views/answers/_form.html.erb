@@ -23,7 +23,7 @@
              <fieldset id="answer[questions[<%= question.id %>]">
                 <% question.choices.each do |choice| %>
                   <p> 
-                    <input type="radio" name="answer[question[<%= question.id %>]]" value="<%= choice.id %>">
+                    <input type="radio" name="answer[questions[<%= question.id %>]]" value="<%= choice.id %>">
                     <%= choice.description %> 
                   </p>
                 <% end %>

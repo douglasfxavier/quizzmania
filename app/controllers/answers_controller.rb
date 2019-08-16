@@ -38,7 +38,7 @@ class AnswersController < ApplicationController
          quizz_id = answer_params[:quizz_id]  
                        
           def save_answers         
-            answer_params[:question].each do |key,value|
+            answer_params[:questions].each do |key,value|
               question_id = key.to_i
               choice_id = value.to_i            
               @answer = Answer.new(:question_id => question_id, :choice_id => choice_id, :user_id => 1)
@@ -92,7 +92,7 @@ class AnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.require(:answer).permit(:quizz_id,:question => {})
+      params.require(:answer).permit(:quizz_id,:questions => {})
     end
 
 end

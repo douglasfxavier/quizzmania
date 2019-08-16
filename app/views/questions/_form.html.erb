@@ -13,20 +13,29 @@
 
   <%= form.text_field :quizz_id, :type=>'hidden', :value=>@quizz_id %>
 
-  <div class="field">
-    <h3><%= form.label :question %></h3>
-    <%= form.text_field :description, :class=>'form-control col-md-5' %>
-  </div>
+  <div class="col-md-12">
+       <div id="tags" class="row"> 
+        <div class="col-md-6"> 
+          <h3><%= form.label :question %></h3>
+          <%= form.text_field :description, :class=>'form-control col-md-12' %>
+        </div>
+      </div>
 
-  <h3>Choices</h3>
-  <div id="choices">
-      <%= form.fields_for :choices do |choice_fields| %>
-        <%= render partial: "choice_fields", locals: {f: choice_fields} %>
-      <% end %>
-      <%= link_to_add_association('Incluir alternativa',form, :choices) %>
-  </div>
-  <br>
-  <div class="actions">
-    <%= form.submit 'Salvar' %>
+    <h3>Choices</h3>
+          <% @quizz.tags.each do |tag| %>
+          <div id="tags" class="row"> 
+            <div class="col-md-1">
+              <span class="badge badge-primary"><%= tag.description %></span>
+            </div>
+            <div class="col-md-5">
+              <input class="form-control" type="text" name="question[tags[<%= tag.id %>]]"> 
+            </div>
+          </div>
+          <% end %>      
+    </div>
+    <br>
+    <div class="actions">
+      <%= form.submit 'Salvar' %>
+    </div>
   </div>
 <% end %>

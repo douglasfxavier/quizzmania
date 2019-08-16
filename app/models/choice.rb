@@ -1,6 +1,6 @@
 class Choice < ApplicationRecord
-  has_many :answers
   belongs_to :tag
-
+  has_many :answers
+  
   accepts_nested_attributes_for :answers
 end
