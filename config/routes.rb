@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tags
   get 'home/index'
   root 'home#index'
   resources :quizzs

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_003257) do
+ActiveRecord::Schema.define(version: 2019_08_16_031650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,9 @@ ActiveRecord::Schema.define(version: 2019_08_15_003257) do
     t.bigint "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tag_id"
     t.index ["question_id"], name: "index_choices_on_question_id"
+    t.index ["tag_id"], name: "index_choices_on_tag_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -48,6 +50,14 @@ ActiveRecord::Schema.define(version: 2019_08_15_003257) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["type_id"], name: "index_quizzs_on_type_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "quizz_id"
+    t.index ["quizz_id"], name: "index_tags_on_quizz_id"
   end
 
   create_table "types", force: :cascade do |t|
@@ -67,6 +77,8 @@ ActiveRecord::Schema.define(version: 2019_08_15_003257) do
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "choices", "questions"
+  add_foreign_key "choices", "tags"
   add_foreign_key "questions", "quizzs"
   add_foreign_key "quizzs", "types"
+  add_foreign_key "tags", "quizzs"
 end

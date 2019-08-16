@@ -21,6 +21,14 @@
      <%= collection_select(:quizz,:type_id, @types, :id, :description) %>
   </div>
 
+  <h3>Tags</h3>
+  <div id="Tags">
+      <%= form.fields_for :tags do |tag_fields| %>
+        <%= render partial: "tag_fields", locals: {f: tag_fields} %>
+      <% end %>
+      <%= link_to_add_association('Add tag',form, :tags) %>
+  </div>  
+
   <div class="actions">
     <%= form.submit %>
   </div>
