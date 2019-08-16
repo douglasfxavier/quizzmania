@@ -1,11 +1,12 @@
 <div class="row d-flex justify-content-between">
 	<% @quizzs.each do |quizz| %>
-	<% @description = quizz.description %>
-	<div class="card m-3" style="width: 18rem; height:  15rem">
-		<div class="card-body">
-			<div style="width: 18rem; height: 10rem">
-				<h1 class="card-title"> <%= "Quizz" %> </h1>
-				<p class="card-text"> <%= @description %></p>
+	<div class="card m-3" style="width: 18rem; height:  18rem">
+		<h3><span class="text-left badge badge-secondary">
+			<%= quizz.type.description %></span></h3>
+		<div class="card-body text-center">
+			<div style="height: 10rem">
+				<h1 class="card-title"> 🤖 </h1>
+				<p class="card-text"> <%= quizz.description %></p>
 			</div>			
 			<div>
 				<%= link_to 'Responder', new_answer_path({:quizz_id => quizz.id}), class: "btn btn-info" %>

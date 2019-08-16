@@ -11,21 +11,17 @@ class AnswersController < ApplicationController
   # GET /answer/1
   # GET /answer/1.json
   def show
-    # TODO: alterar parâmetro user_id no final, quando implementar authenticação
-    # @answers = Answer.joins(
-    #   'JOIN questions ON answers.question_id = questions.id
-    #    JOIN quizzs ON quizzs.id = questions.quizz_id')
-    # .where('user_id= ? and quizz_id = ?',1,14)
+    @quizz = @answer.question.quizz
     @answers = Quizz.joins(
       'JOIN questions ON questions.quizz_id = quizzs.id
        JOIN answers ON answers.question_id = questions.id
        JOIN choices ON answers.choice_id = choices.id'
-      ).where('user_id= ? and quizz_id = ?',1,14).uniq
+      ).where('user_id= ? and quizz_id = ?',current_user,@quizz.id).uniq
   end
 
   # GET /answer/new
   def new
-    @user_id = 1
+    @user_id = current_user
     @quizz_id = params[:quizz_id]
     @quizz = Quizz.find(params[:quizz_id])
     @answer = Answer.new

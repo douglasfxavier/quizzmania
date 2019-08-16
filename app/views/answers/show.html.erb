@@ -4,7 +4,7 @@
 	<h3>Suas Respostas </h3>
 
 
-	<% @answers.each do |answer| %>
+<!-- 	<% @answers.each do |answer| %>
 		
 			<% answer.questions.each do |question| %>
 			<p>
@@ -13,7 +13,7 @@
 			</p>
 			<% end %>
 		
-	<% end %>
+	<% end %> -->
 
 <!-- 	<p>
 	  <strong>Pergunta:</strong>
@@ -26,5 +26,5 @@
 	</p> -->
 
 
-	<%= link_to 'Voltar', questions_path %>
+	<%= link_to 'Voltar', new_answer_path({:quizz_id => @quizz.id}) %>
 </div>
