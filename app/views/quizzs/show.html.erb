@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @quizz.description %>
-</p>
+
+<h1><span class="text-muted">Quizz: </span><%= @quizz.description %> <%= @quizz.image %></h1>
+<br>
 
 <p>
   <strong>Type:</strong>
@@ -11,23 +10,37 @@
 </p>
 
 <p>
-	<% if @quizz.questions.size > 0 %>
-		<strong>Questions</strong>
+  <strong>Tags:</strong>
+	<% @quizz.tags.each do |tag| %>
+		<span class="badge badge-primary"><%= tag.description %></span>
 	<% end %>
-	<% @contador = 0 %>
-	<% @quizz.questions.each do |question| %>
-		<p><%= @contador = @contador+1 %>
-			<%= question.description  =%> 
-			<%= link_to 'Edit', edit_question_path(question, :quizzid => @quizz.id) %>
-			<%= link_to 'Show', question %>			
-			<%= link_to 'Delete', question, method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' } %></td>	
-		</p>
-	<% end %>
-</p>
+</p>	
 
-<div>
+<div class="text-right">
   <td><%= link_to 'New question', new_question_path(:quizzid => @quizz.id) %></td>
 </div>
 
-<%= link_to 'Edit', edit_quizz_path(@quizz) %> |
-<%= link_to 'Back', quizzs_path %>
+<% if @quizz.questions.size > 0 %>
+
+	<h2>Questions</h2>
+	
+	<% contador = 0 %>
+	<table class="table">	
+		<thead></thead>
+		<tbody>
+			<% @quizz.questions.each do |question| %>
+				<tr>
+					<td><%=	contador = contador+1 %></td>
+					<td><%= question.description %></td>
+					<td><%= link_to 'Edit', edit_question_path(question, :quizzid => @quizz.id) %></td>
+					<td><%= link_to 'Show', question %></td>		
+					<td><%= link_to 'Delete', question, method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' } %></td>
+				</tr>
+			<% end %>
+		</tbody>	
+	</table>	
+<% end %>
+
+<p class="text-right">
+	<%= link_to 'Back', quizzs_path %>
+</p>

@@ -14,28 +14,38 @@
   <%= form.text_field :quizz_id, :type=>'hidden', :value=>@quizz_id %>
 
   <div class="col-md-12">
-       <div id="tags" class="row"> 
+       <div class="row"> 
         <div class="col-md-6"> 
           <h3><%= form.label :question %></h3>
           <%= form.text_field :description, :class=>'form-control col-md-12' %>
         </div>
       </div>
-
+    <br>
     <h3>Choices</h3>
+          <% choice_index = 0 %>
+          <% choice_value = "" %>
           <% @quizz.tags.each do |tag| %>
-          <div id="tags" class="row"> 
-            <div class="col-md-1">
-              <span class="badge badge-primary"><%= tag.description %></span>
+            <div class="row"> 
+              <div class="col-md-1">
+                <span class="badge badge-primary"><%= tag.description %></span>
+              </div>
+              <div class="col-md-5">
+                <% if !@question.choices[choice_index].nil? %>
+                  <% choice_value = @question.choices[choice_index].description %>
+                  <% choice_index = choice_index + 1 %>
+                <% end %>          
+                <input class="form-control" type="text" name="question[choices[<%= tag.id %>]]" value="<%= choice_value %>"> 
+              </div>
             </div>
-            <div class="col-md-5">
-              <input class="form-control" type="text" name="question[tags[<%= tag.id %>]]"> 
-            </div>
-          </div>
+            <br>
+            
           <% end %>      
     </div>
     <br>
-    <div class="actions">
-      <%= form.submit 'Salvar' %>
+    <div class="row">
+      <div class="actions col-md-6 text-right">
+        <%= form.submit %>
+      </div>
     </div>
   </div>
 <% end %>

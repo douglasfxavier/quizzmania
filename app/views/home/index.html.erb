@@ -1,11 +1,11 @@
-<div class="row d-flex justify-content-between">
+<div class="row d-flex justify-content">
 	<% @quizzs.each do |quizz| %>
 	<div class="card m-3" style="width: 18rem; height:  18rem">
 		<h3><span class="text-left badge badge-secondary">
 			<%= quizz.type.description %></span></h3>
 		<div class="card-body text-center">
 			<div style="height: 10rem">
-				<h1 class="card-title"> 🤖 </h1>
+				<h1 class="card-title"> <%= quizz.image %> </h1>
 				<p class="card-text"> <%= quizz.description %></p>
 			</div>			
 			<div>

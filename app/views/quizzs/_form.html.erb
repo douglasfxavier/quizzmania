@@ -11,25 +11,44 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
+  <div class="col-md-12">
+    <div class="row"> 
+      <div class="col-md-6">
+        <%= form.label :description %>
+        <%= form.text_field :description, :class=>'form-control col-md-12' %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :type_id %>
-     <%= collection_select(:quizz,:type_id, @types, :id, :description) %>
-  </div>
+    <div class="row"> 
+      <div class="col-md-6">
+        Emoji
+        <%= form.text_field :image, :class=>'form-control col-md-12'%>
+      </div>
+    </div>
 
-  <h3>Tags</h3>
-  <div id="Tags">
-      <%= form.fields_for :tags do |tag_fields| %>
-        <%= render partial: "tag_fields", locals: {f: tag_fields} %>
-      <% end %>
-      <%= link_to_add_association('Add tag',form, :tags) %>
-  </div>  
+    <div class="row">
+      <div class="col-md-6">
+        <%= form.label :type_id %>
+        <%= collection_select(:quizz,:type_id, @types, :id, :description,{}, {:class=>'form-control col-md-12'}) %>
+      </div>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+     <div class="row">
+      <div class="col-md-12" id="tags">
+        <br>  
+        <h3>Tags</h3>
+        <%= form.fields_for :tags do |tag_fields| %>
+          <%= render partial: "tag_fields", locals: {f: tag_fields} %>
+        <% end %>
+        <p><%= link_to_add_association('Add tag',form, :tags) %></p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="actions col-md-6 text-right">
+        <%= form.submit %>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>
+<% end %> 

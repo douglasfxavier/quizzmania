@@ -26,31 +26,34 @@ class QuestionsController < ApplicationController
   # GET /questions/1/edit
   def edit
     @quizz_id = params['quizzid']
+    @quizz = Quizz.find(params['quizzid'])
   end
+
+
+  def save_question_choices   
+    quizz_id = question_params[:quizz_id]  
+    question_description = question_params[:description]       
+    @question = Question.new(:description => question_description, :quizz_id => quizz_id)
+    if !@question.save 
+      return false
+    end  
+    question_id = @question.id
+    question_params[:choices].each do |key,value|
+      tag_id = key.to_i
+      choice_description = value
+      @choice = Choice.new(:description => choice_description, :question_id => question_id, :tag_id => tag_id)
+      if !@choice.save
+        return false
+      end
+    end
+    return true  
+  end  
+
 
   # POST /questions
   # POST /questions.json
-  def create
- 
-   
-    def save_question_choices   
-      quizz_id = question_params[:quizz_id]  
-      question_description = question_params[:description]       
-      @question = Question.new(:description => question_description, :quizz_id => quizz_id)
-      if !@question.save 
-        return false
-      end  
-      question_params[:tags].each do |key,value|
-        question_id = @question.id
-        tag_id = key.to_i
-        tag_description = value
-        @choice = Choice.new(:description => tag_description, :question_id => question_id, :tag_id => tag_id)
-        if !@choice.save
-          return false
-        end
-      end
-      return true  
-    end    
+
+  def create 
     
     respond_to do |format|
       if save_question_choices() == true
@@ -63,12 +66,32 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def update_question_choices   
+    id = params[:id]
+    quizz_id = question_params[:quizz_id]  
+    question_description = question_params[:description]       
+    
+    if !@question.update(:id => id, :description => question_description, :quizz_id => quizz_id) 
+      return false
+    end
+    question_id = @question.id  
+    question_params[:choices].each do |key,value|
+      tag_id = key.to_i
+      choice_description = value
+      @choice = Choice.find_by(question_id: question_id, tag_id: tag_id)  
+      if !@choice.update(:description => choice_description)
+        return false
+      end
+    end
+    return true  
+  end  
+
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
  
     respond_to do |format|
-      if @question.update(question_params)
+      if update_question_choices() == true
         format.html { redirect_to @question, quizzid: @quizz_id, notice: 'Question atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @question }
       else
@@ -99,6 +122,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:description,:quizz_id, :tags => {})
+      params.require(:question).permit(:description,:quizz_id, :choices => {})
     end
 end

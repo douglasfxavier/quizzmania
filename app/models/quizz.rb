@@ -3,5 +3,5 @@ class Quizz < ApplicationRecord
   has_many :questions
   has_many :tags
 
-   accepts_nested_attributes_for :tags, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :tags, reject_if: :all_blank, allow_destroy: true
 end

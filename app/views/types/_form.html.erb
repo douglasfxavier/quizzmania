@@ -10,13 +10,24 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <%= form.label :description %>
+        <%= form.text_field :description, :class=>'form-control col-md-12'%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        Emoji
+        <%= form.text_field :image, :class=>'form-control col-md-12'%>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="actions col-md-6 text-right">
+        <%= form.submit %>
+      </div>
+    </div>
   </div>
 <% end %>

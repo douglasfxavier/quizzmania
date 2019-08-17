@@ -7,12 +7,19 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style type="text/css">
+    .container.custom-container {
+      padding: 50px 50px 50px 50px;
+    }
+</style>
   </head>
 
   <body>
-    <div class="container">
+    <div>
       <%= render partial: "/layouts/menu" %>
-      <%= yield %>
+      <div class="container custom-container">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

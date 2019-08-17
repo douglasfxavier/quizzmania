@@ -16,7 +16,28 @@ class AnswersController < ApplicationController
       'JOIN questions ON questions.quizz_id = quizzs.id
        JOIN answers ON answers.question_id = questions.id
        JOIN choices ON answers.choice_id = choices.id'
-      ).where('user_id= ? and quizz_id = ?',current_user,@quizz.id).uniq
+      ).where('user_id= ? and quizz_id = ?',current_user.id,@quizz.id).uniq
+
+    @map = Hash.new
+
+    @answers[0].questions.each do |question|
+      @choice = question.answers[0].choice
+
+      if @map[@choice.tag.id].nil?
+       @map[@choice.tag.id] = 0
+      end
+      @map[@choice.tag.id] = @map[@choice.tag.id] + 1   
+    end
+
+    aux = 0 
+    @tag_id = 0
+    @map.each do |key,value|
+      if value > aux
+        @tag_id = key
+      end
+    end
+
+    @tagresult = Tag.find(@tag_id)
   end
 
   # GET /answer/new
@@ -37,7 +58,7 @@ class AnswersController < ApplicationController
             answer_params[:questions].each do |key,value|
               question_id = key.to_i
               choice_id = value.to_i            
-              @answer = Answer.new(:question_id => question_id, :choice_id => choice_id, :user_id => 1)
+              @answer = Answer.new(:question_id => question_id, :choice_id => choice_id, :user_id => current_user.id)
               if !@answer.save 
                 return false
               end              
