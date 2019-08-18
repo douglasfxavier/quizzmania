@@ -1,0 +1,11 @@
+pt-BR:
+  hello: "Ola, mundo!"
+  helpers:
+   submit:
+     create: "Criar %{model}"
+     update: "Alterar %{model}"
+  activerecords:
+    models:
+      question:
+        one: Pergunta
+        other: Perguntas
