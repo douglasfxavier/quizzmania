@@ -16,15 +16,6 @@
       </ul>
     <% end %>
   </div>
-  <ul class="nav navbar-nav navbar-right">
-    <ul>
-     <a href="<%= request.path %>?locale=en">
-       <li class="flag-icon flag-icon-us"></li>
-     </a>
-     <a href="<%= request.path %>?locale=pt-BR">
-       <li class="flag-icon flag-icon-br"></li>
-     </a>    
-   </ul>
     <% if user_signed_in? %>
       <li>
       <%= current_user.name %>
