@@ -1,19 +1,20 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
-  password: doug3684
-  host: localhost
-  port: 5432
+  username: ENV['DB_USERNAME']
+  password: ENV['DB_PASSWORD']
+  host: ENV['DB_HOST']
+  port: ENV['DB_PORT']
 
-development:
-  <<: *default
-  database: quizzmania_development
+# development:
+#   <<: *default
+#   database: quizzmania_development
 
-test:
-  <<: *default
-  database: quizzmania_test
+# test:
+#   <<: *default
+#   database: quizzmania_test
 
 production:
   <<: *default
-  database: quizzmania
+  #database: quizzmania
+  database: ENV['DB_NAME']
