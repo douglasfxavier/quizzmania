@@ -6,13 +6,13 @@ default: &default
   host: ENV['DB_HOST']
   port: ENV['DB_PORT']
 
-# development:
-#   <<: *default
-#   database: quizzmania_development
+development:
+  <<: *default
+  database: ENV['DB_DEV_NAME']
 
-# test:
-#   <<: *default
-#   database: quizzmania_test
+test:
+  <<: *default
+  database: ENV['DB_TEST_NAME_']
 
 production:
   <<: *default
