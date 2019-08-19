@@ -1,5 +1,4 @@
 pt-BR:
-  hello: "Ola, mundo!"
   helpers:
    submit:
      create: "Criar %{model}"
